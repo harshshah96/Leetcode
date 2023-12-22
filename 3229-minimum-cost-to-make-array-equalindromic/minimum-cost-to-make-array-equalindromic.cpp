@@ -1,3 +1,7 @@
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 class Solution {
 public:
     bool isPalindrome(int num) {
@@ -37,12 +41,9 @@ public:
     long long minimumCost(vector<int>& nums) {
         int n=nums.size();
         sort(nums.begin(),nums.end());
-        int mid=(n %2 )?nums[n/2]: (nums[n/2] + nums[n/2 - 1])/2;
-        // int mid2=(n %2 )?nums[n/2]: (nums[n/2] + nums[n/2 ])/2;
-        vector<int> a=nearestPalindromic(mid);
-        int p=a.size();
-        int x1=nearestPalindromic(mid)[0];
-        int x2=p>1?nearestPalindromic(mid)[1] : INT_MIN;
+        vector<int> a=nearestPalindromic((n %2 )?nums[n/2]: (nums[n/2] + nums[n/2 - 1])/2);
+        int x1=nearestPalindromic((n %2 )?nums[n/2]: (nums[n/2] + nums[n/2 - 1])/2)[0];
+        int x2=a.size()>1?nearestPalindromic((n %2 )?nums[n/2]: (nums[n/2] + nums[n/2 - 1])/2)[1] : INT_MIN;
 
         long long int ans1=0;
         long long int ans2=0;
