@@ -1,7 +1,3 @@
-static int io_opt = []() {
-  ios::sync_with_stdio(false);
-  return 0;
-}();
 class Solution {
 public:
     bool isPalindromic(int num) {
@@ -13,7 +9,6 @@ public:
         }
         return original == reversed;
     }
-
     long long calculateCost(const vector<int>& nums, int target) {
         long long cost = 0;
         for (int num : nums) {
@@ -21,7 +16,6 @@ public:
         }
         return cost;
     }
-    
     int closestPalindromicSmall(int num) {
         if (isPalindromic(num)) {
             return num;
@@ -34,28 +28,23 @@ public:
             }
             smaller--;
         }
-}
-int closestPalindromicLarge(int num) {
-        if (isPalindromic(num)) {
-            return num;
-        }
-
-        int larger = num + 1;
-        while (true) {
-            if (isPalindromic(larger)) {
-                return larger;
+    }
+    int closestPalindromicLarge(int num) {
+            if (isPalindromic(num)) {
+                return num;
             }
-            larger++;
-        }
-}
 
+            int larger = num + 1;
+            while (true) {
+                if (isPalindromic(larger)) {
+                    return larger;
+                }
+                larger++;
+            }
+    }
     long long minimumCost(vector<int>& nums) {
-        ios_base::sync_with_stdio(0);
-        cin.tie(nullptr);
-        cout.tie(nullptr);
+        
         long long minCost = LLONG_MAX;
-        int maxNum = *max_element(nums.begin(), nums.end());
-        int minNum = *min_element(nums.begin(), nums.end());
         nth_element(nums.begin(), nums.begin() + nums.size() / 2, nums.end());
         int medium = nums[nums.size() / 2];
 
