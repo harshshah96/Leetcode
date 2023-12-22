@@ -59,8 +59,6 @@ int closestPalindromicLarge(int num) {
         nth_element(nums.begin(), nums.begin() + nums.size() / 2, nums.end());
         int medium = nums[nums.size() / 2];
 
-        // minCost = min(calculateCost(nums, closestPalindromicSmall(minNum)), minCost);
-        // minCost = min(calculateCost(nums, closestPalindromicLarge(maxNum)), minCost);
         minCost = min(calculateCost(nums, closestPalindromicSmall(medium)), minCost);
         minCost = min(calculateCost(nums, closestPalindromicLarge(medium)), minCost);
 
