@@ -1,5 +1,9 @@
 #define ll long long int
 #define mod 1000000007
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 class Solution {
 public:
     vector<vector<int>> dp;
