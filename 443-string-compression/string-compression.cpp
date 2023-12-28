@@ -5,26 +5,28 @@ static int io_opt = []() {
 class Solution {
 public:
     int compress(vector<char>& chars) {
-        string s="";
-        int n=chars.size();
-        if(n==1) return n;
         int i=0;
-    
+        int ansIndex=0;
+        int n=chars.size();
         while(i<n){
-            int j=i;
-            int count=1;
-            while(j<n-1 and chars[j]==chars[j+1]){
+            int j = i+1;
+            while(j<n && chars[i]==chars[j]){
                 j++;
-                count++;
             }
-            s += chars[i];
-
-            if(count>1) s += to_string(count);
-            i = ++j;
+            //old char store krlo
+            chars[ansIndex] = chars[i];
+            ansIndex++;
+            int count = j-i;
+            if(count>1){
+                //converting count into single digit and saving in answer
+                string cnt = to_string(count);
+                for(char ch: cnt){
+                    chars[ansIndex] = ch;
+                    ansIndex++;
+                }
+            }
+            i = j; //moving to new/diff character
         }
-        for(int i=0; i<s.length(); i++){
-            chars[i]=s[i];
-        }
-        return s.length();
+        return ansIndex;
     }
 };
