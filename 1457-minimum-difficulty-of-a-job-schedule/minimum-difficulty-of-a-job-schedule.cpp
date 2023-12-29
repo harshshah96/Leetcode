@@ -33,13 +33,15 @@ private:
         // daysLeft--;
         int stop = len - idx - (daysLeft -1 ) + 1;
 
+        // i=1 + (idx-1);
+
         int res = INT_MAX;
-        for (int i = 1; i < stop; i++) {
-            maxDifficulty = max(maxDifficulty, jd[idx + i - 1]);
-            int other = memo[daysLeft-1][idx + i];
+        for (int i = idx; i <= len - daysLeft; i++) {
+            maxDifficulty = max(maxDifficulty, jd[i]);
+            int other = memo[daysLeft-1][i+1];
             if (other == 0) {
-                helper(jd, daysLeft-1, idx + i, memo);
-                other = memo[daysLeft-1][idx + i];
+                helper(jd, daysLeft-1, i+1, memo);
+                other = memo[daysLeft-1][i+1];
             }
             res = min(res, other + maxDifficulty);   
         }
