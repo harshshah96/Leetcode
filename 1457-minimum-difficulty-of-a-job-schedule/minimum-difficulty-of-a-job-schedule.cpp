@@ -30,19 +30,19 @@ private:
             return;
         }
         int maxDifficulty = jd[idx];
-        daysLeft--;
-        int stop = len - idx - daysLeft + 1;
+        // daysLeft--;
+        int stop = len - idx - (daysLeft -1 ) + 1;
 
         int res = INT_MAX;
         for (int i = 1; i < stop; i++) {
             maxDifficulty = max(maxDifficulty, jd[idx + i - 1]);
-            int other = memo[daysLeft][idx + i];
+            int other = memo[daysLeft-1][idx + i];
             if (other == 0) {
-                helper(jd, daysLeft, idx + i, memo);
-                other = memo[daysLeft][idx + i];
+                helper(jd, daysLeft-1, idx + i, memo);
+                other = memo[daysLeft-1][idx + i];
             }
             res = min(res, other + maxDifficulty);   
         }
-        memo[daysLeft + 1][idx] = res;
+        memo[daysLeft][idx] = res;
     }
 };
