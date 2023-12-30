@@ -1,23 +1,16 @@
-static int io_opt = []() {
-  ios::sync_with_stdio(false);
-  return 0;
-}();
 class Solution {
 public:
     bool makeEqual(vector<string>& words) {
-        unordered_map<char,int>mp;
+        unordered_map<char,int> mp;
         int n=words.size();
-        for(int i=0; i<n; i++){
-            for(int j=0; j<words[i].size(); j++){
-                mp[words[i][j]]++;
+        for(auto s:words){
+            for(auto c:s){
+                mp[c]++;
             }
         }
-        for(auto ele:mp){
-            if(ele.second % n !=0) return false;
+        for(auto i:mp){
+            if(i.second%n) return false;
         }
-
         return true;
-
-        
     }
 };
