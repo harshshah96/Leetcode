@@ -5,13 +5,13 @@ static int io_opt = []() {
 class Solution {
 public:
     bool makeEqual(vector<string>& words) {
-        vector<int> cnt(26);
-        for (const auto& w : words) {
-            for (const auto& c : w) {
-                ++cnt[c - 'a'];
+        vector<int> count(26);
+        for (auto& w : words) {
+            for (auto& c : w) {
+                ++count[c - 'a'];
             }
         }
-        return all_of(cbegin(cnt), cend(cnt),
+        return all_of(cbegin(count), cend(count),
                       [&words](int c) {
                           return c % size(words) == 0;
                       });
