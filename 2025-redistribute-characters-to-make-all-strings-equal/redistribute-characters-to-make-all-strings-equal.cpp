@@ -5,16 +5,15 @@ static int io_opt = []() {
 class Solution {
 public:
     bool makeEqual(vector<string>& words) {
-        unordered_map<char,int> mp;
-        int n=words.size();
-        for(auto s:words){
-            for(auto c:s){
-                mp[c]++;
+        vector<int> cnt(26);
+        for (const auto& w : words) {
+            for (const auto& c : w) {
+                ++cnt[c - 'a'];
             }
         }
-        for(auto i:mp){
-            if(i.second%n) return false;
-        }
-        return true;
+        return all_of(cbegin(cnt), cend(cnt),
+                      [&words](int c) {
+                          return c % size(words) == 0;
+                      });
     }
 };
