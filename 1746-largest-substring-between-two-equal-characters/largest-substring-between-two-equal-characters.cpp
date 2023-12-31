@@ -5,19 +5,19 @@ static int io_opt = []() {
 class Solution {
 public:
     int maxLengthBetweenEqualCharacters(string s) {
-        int n=s.length();
-        int i=0;
-        int ans=INT_MIN;
-        while(i<n){
-            int j = n-1;
-            while(j<n and s[i]!=s[j]) j--;
-            if(j<n){
-                ans=max(ans,j-i-1);
-            }
-            i++;
-        }
+       unordered_map<char,int> mp;
+       int n= s.length();
+       int ans=INT_MIN;
 
-        return ans == INT_MIN ? -1 : ans ;
-        
+       for(int i=0; i<n; i++){
+           if(mp.find(s[i])!=mp.end()){
+               ans=max(ans,abs(i-mp[s[i]]-1));
+           }else{
+               mp[s[i]]= i;
+           }
+       }
+
+       return ans == INT_MIN ? -1 : ans;
+
     }
 };
