@@ -23,7 +23,7 @@ public:
                 temp.push_back(candidates[i]);
                 dfs(candidates, ans, temp, i + 1, sum + candidates[i]);
                 temp.pop_back();
-            }
+            }else break;
         }
 
         return;
