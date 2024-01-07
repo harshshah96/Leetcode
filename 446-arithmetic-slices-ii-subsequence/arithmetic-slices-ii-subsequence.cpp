@@ -1,3 +1,7 @@
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 #define ll long long int
 class Solution {
 public:
@@ -13,7 +17,6 @@ public:
                     ans +=dp[j][diff];
                 }
                 dp[i][diff] += dp[j][diff]+1;
-
             }
         }
         return (int)ans;
