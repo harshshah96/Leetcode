@@ -4,15 +4,20 @@ static int io_opt = []() {
 }();
 class Solution {
 public:
-    void inorder(TreeNode* root , int &sum,int low, int high){
-        if(root==NULL) return;
-        if(root->val>low)inorder(root->left,sum, low,high);
-        if(root->val>=low && root->val<=high) sum+=root->val;
-        if(root->val<high)inorder(root->right, sum, low,high);
-    }
     int rangeSumBST(TreeNode* root, int low, int high) {
         int sum=0;
-        inorder(root,sum, low, high);
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            TreeNode* a=q.front();
+            if(a->val <=high && a->val >=low ) sum+=a->val;
+            if(a->left) q.push(a->left);
+            if(a->right) q.push(a->right);
+
+            q.pop();
+
+        }
+
         return sum;
     }
 };
