@@ -10,7 +10,9 @@ public:
         if(root==NULL) return 0;
 
         int l= solve(root->left);
+        root->left=NULL;
         int r= solve(root->right);
+        root->right=NULL;
 
         int neche_wala_path = l+r+ root->val;
         int koi_ek_acha = max(l,r) + root->val;
