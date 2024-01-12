@@ -5,31 +5,22 @@ static int io_opt = []() {
 class Solution {
 public:
     bool halvesAreAlike(string s) {
-        int n=s.length();
+        int n=s.length(); // max 1000;
         // length is always even
         
         int count1=0;
-        int count2=0;
-
-        unordered_set<char> st;
-        st.insert('A');
-        st.insert('E');
-        st.insert('I');
-        st.insert('O');
-        st.insert('U');
-        st.insert('a');
-        st.insert('e');
-        st.insert('i');
-        st.insert('o');
-        st.insert('u');
 
         for(int i=0; i<n/2; i++){
-            if(st.count(s[i])) count1++;
-            if(st.count(s[i+n/2])>0) count2++;
+            if(s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' ||
+                s[i] == 'u' || s[i] == 'A' || s[i] == 'E' || s[i] == 'I' ||
+                s[i] == 'O' || s[i] == 'U' ) count1++;
+            if(s[i+n/2] == 'a' || s[i+n/2] == 'e' || s[i+n/2] == 'i' || s[i+n/2] == 'o' ||
+                s[i+n/2] == 'u' || s[i+n/2] == 'A' || s[i+n/2] == 'E' || s[i+n/2] == 'I' ||
+                s[i+n/2] == 'O' || s[i+n/2] == 'U' ) count1--;
 
 
         }
-    return count1==count2;
+    return count1==0;
         
     }
 };
