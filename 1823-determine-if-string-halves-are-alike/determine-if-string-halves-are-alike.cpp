@@ -18,7 +18,6 @@ public:
                 s[i+n/2] == 'u' || s[i+n/2] == 'A' || s[i+n/2] == 'E' || s[i+n/2] == 'I' ||
                 s[i+n/2] == 'O' || s[i+n/2] == 'U' ) count1--;
 
-
         }
     return count1==0;
         
