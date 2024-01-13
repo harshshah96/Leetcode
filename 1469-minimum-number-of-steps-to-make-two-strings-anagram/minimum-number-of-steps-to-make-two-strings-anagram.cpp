@@ -5,26 +5,13 @@ static int io_opt = []() {
 class Solution {
 public:
     int minSteps(string s, string t) {
-        int  n=s.length();
+        int occ[26] = {0};
+        for (auto it : s) occ[it-'a'] ++;
+        for (auto it : t) occ[it-'a']--;
 
-        unordered_map<char, int> mp;
+        int res = 0;
+        for (int i = 0; i < 26; i++) res += abs(occ[i]);
 
-        for(int i=0; i<n; i++){
-            mp[s[i]]++;
-        }
-        for(int i=0; i<n; i++){
-            if(mp[t[i]]>0) mp[t[i]]--;
-            if(mp[t[i]]==0) mp.erase(t[i]);
-        }
-        int ans=0;
-        for(auto ele: mp){
-            ans+=ele.second;
-
-        }
-
-        return ans;
-
-
-        
+        return res / 2;
     }
 };
