@@ -34,6 +34,7 @@ public:
             result[i]=result[result.size()-i-1];
             result[result.size()-i-1]=temp;
         }
+        root->left = nullptr, root->right = nullptr;
         return result;
     }
 };
