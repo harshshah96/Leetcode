@@ -30,7 +30,7 @@ public:
             currSum += arr[i];
             index++;
         }
-        
+        int a=index;
         // Now, we have to skip all the elements, whose value is equal to
         // currValue + 1
         while(index < arr.size() && arr[index] == currValue + 1)
@@ -43,7 +43,7 @@ public:
         // or not include the sum of current element in our answer
         // so we explore all possibility and take maximum of them
         
-        return t[i] = max(currSum + solve(arr, index), solve(arr, i + 1));
+        return t[i] = max(currSum + solve(arr, index), solve(arr, a));
         
         // If we decide to take the curr element in our answer, then upto the elemet we skip the next value, we paas that index
         // but if decided no to make this vurrent element then simply paas
