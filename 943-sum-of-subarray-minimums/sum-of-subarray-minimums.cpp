@@ -1,33 +1,44 @@
-#define MOD 1000000007
+using ll = long long;
+const int MOD = 1e9 + 7;
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 
 class Solution {
 public:
-    int sumSubarrayMins(vector<int>& arr) {
-        int n = arr.size();
-        vector<int> left(n), right(n);
+    int sumSubarrayMins(vector<int>& nums) {
+        int length = nums.size();
+        vector<int> left(length, -1);
+        vector<int> right(length, length);
+        stack<int> stk;
 
-        stack<int> s;
-        for (int i = 0; i < n; i++) {
-            while (!s.empty() && arr[i] < arr[s.top()]) {
-                s.pop();
+        for (int i = 0; i < length; ++i) {
+            while (!stk.empty() && nums[stk.top()] >= nums[i]) {
+                stk.pop();
             }
-            left[i] = s.empty() ? -1 : s.top();
-            s.push(i);
+            if (!stk.empty()) {
+                left[i] = stk.top();
+            }
+            stk.push(i);
         }
 
-        while (!s.empty()) s.pop(); // Clear the stack
+        stk = stack<int>();
 
-        for (int i = n - 1; i >= 0; i--) {
-            while (!s.empty() && arr[i] <= arr[s.top()]) {
-                s.pop();
+        for (int i = length - 1; i >= 0; --i) {
+            while (!stk.empty() && nums[stk.top()] > nums[i]) {
+                stk.pop();
             }
-            right[i] = s.empty() ? n : s.top();
-            s.push(i);
+            if (!stk.empty()) {
+                right[i] = stk.top();
+            }
+            stk.push(i);
         }
 
-        long long int sum = 0; 
-        for (int i = 0; i < n; ++i) {
-            sum += static_cast<long long int>(i - left[i]) * (right[i] - i) * arr[i] % MOD;
+        ll sum = 0;
+
+        for (int i = 0; i < length; ++i) {
+            sum += static_cast<ll>(i - left[i]) * (right[i] - i) * nums[i] % MOD;
             sum %= MOD;
         }
 
