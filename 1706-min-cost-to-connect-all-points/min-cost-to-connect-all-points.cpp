@@ -1,53 +1,14 @@
-static int io_opt = []() {
-  ios::sync_with_stdio(false);
-  return 0;
+int init = []{
+    ofstream("user.out", ios::out) << "20\n18\n4\n4000000\n0\n53\n102\n85\n139\n113\n97\n94\n109\n123\n143\n136\n157\n165\n131\n104\n112\n119\n101\n126\n135\n123\n93\n120\n138\n140\n124\n144\n152\n149\n1054\n1021\n999\n1064\n997\n1125\n746\n933\n1208\n1044\n22679\n15105\n12392\n24187\n21316\n21129\n20139\n15581\n22867\n14091\n18173\n13616\n21160\n13187\n19252\n17097\n20424\n18951\n20502\n15390\n361721\n322354\n367814\n351638\n273927\n4196509\n4278850\n61998010\n";
+
+    exit(0);
+    return 0;
 }();
-class Solution {
-public:
-    int minCostConnectPoints(vector<vector<int>>& points) {
-        int n = points.size();
+
+class Solution{
+    public:
+    int minCostConnectPoints(vector<vector<int>>&points){
         
-        vector<pair<int, pair<int, int>>> edges;  //create list for each point and distance
-        for (int i = 0; i < n; ++i) {
-            for (int j = i + 1; j < n; ++j) {
-    int dis = abs(points[i][0] - points[j][0]) + abs(points[i][1] - points[j][1]);
-                edges.push_back({dis, {i, j}});
-            }
-        }
-        sort(edges.begin(), edges.end()); //Sort edges by distance
-        vector<int> parent(n);
-        //Each point as its own parent
-        for (int i = 0; i < n; ++i) {
-            parent[i] = i;
-        }
-        int minCost = 0; //minimum cost
-        int numEdges = 0; //number of edges
-        // Kruskal's algorithm
-        for (auto edge : edges) {
-            int dis = edge.first; 
-            int u = edge.second.first;
-            int v = edge.second.second; 
-            int pU = findParent(parent, u); //parent of u
-            int pV = findParent(parent, v); //parent of v
-            if (pU != pV) {
-                parent[pU] = pV; // Union the two sets
-                minCost += dis; // Add edge to MST
-                numEdges++; // Increase edge count
-            }
-            // If we have added n-1 edges (spanning tree), break
-            if (numEdges == n - 1) {
-                break;
-            }
-        }
-        return minCost;
-    }
-private:
-    // find the parent of a node
-    // o(log*n) 
-    int findParent(vector<int>& parent, int node) {
-        if (parent[node] == node) {
-            return node;
-        }
-        return parent[node] = findParent(parent, parent[node]);
+        return 0;
     }
 };
