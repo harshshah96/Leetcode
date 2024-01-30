@@ -8,14 +8,7 @@ public:
         if(op=="*") return second*first;
         else if(op == "+") return second+first;
         else if(op == "-") return second - first;
-        else if(op == "/") {
-            int a=second/first;
-            if(a<0){
-                if(a*first==second)  return a;
-                else return a;
-            }
-            else return a ;
-        }
+        else if(op == "/") return second/first;
 
         return -1;
     }
