@@ -4,25 +4,18 @@ static int io_opt = []() {
 }();
 class Solution {
 public:
-    vector<int> dailyTemperatures(vector<int>& temperatures) {
-        vector<int> result(temperatures.size(), 0);
-        vector<int> stack;
-
-        for (int i = temperatures.size() - 1; i >= 0; --i) {
-            int currTemperature = temperatures[i];
-
-            while (!stack.empty() && currTemperature >= temperatures[stack.back()]) {
-                stack.pop_back();
+    std::vector<int> dailyTemperatures(std::vector<int>& temps) {
+        std::vector<int> results(temps.size());
+        std::stack<int> stack;
+        /// UPVOTE !
+        for (int i = 0; i < temps.size(); i++) {
+            while (!stack.empty() && temps[stack.top()] < temps[i]) {
+                results[stack.top()] = i - stack.top();
+                stack.pop();
             }
-
-            if (!stack.empty()) {
-                result[i] = stack.back() - i;
-            }
-
-            stack.push_back(i);
+            stack.push(i);
         }
 
-        return result;
+        return results;
     }
 };
-
