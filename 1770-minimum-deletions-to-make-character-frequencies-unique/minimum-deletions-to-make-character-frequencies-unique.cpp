@@ -8,29 +8,16 @@ public:
         vector<int> freq(26, 0);
         for(char c: s)
             freq[c-'a']++;
-        priority_queue<int> pq;
-        for(int f: freq)
-            if (f>0) pq.push(f);
-
-        int upper=pq.top();
-     //   cout<<upper<<endl;
-        pq.pop();
+        set<int> freq_seen;
         int ans=0;
-        while(!pq.empty() && upper>=1){
-            int top=pq.top();
-            pq.pop();
-            int del=top+1-upper;
-            if (del<0) upper=top;
-            else{
-                ans+=del;
-                upper--;
+        for(int i=0; i<26; i++){
+            int f=freq[i];
+            if (f==0) continue;
+            while(freq_seen.count(f) && f>0){
+                f--;
+                ans++;
             }
-        //    cout<<upper<<endl;
-        }
-        while(!pq.empty()){
-            int top=pq.top();
-            pq.pop();
-            ans+=top;
+            if (f>0) freq_seen.insert(f);
         }
         return ans;
     }
