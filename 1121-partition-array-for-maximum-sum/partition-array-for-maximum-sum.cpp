@@ -1,4 +1,7 @@
-#pragma GCC optimize("O3", "unroll-loops")
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 class Solution {
 public:
     int n, k;
