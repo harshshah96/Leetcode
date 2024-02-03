@@ -4,20 +4,12 @@ static int io_opt = []() {
 }();
 class Solution {
 public:
+    const int mod=1e9+7;
     int countOrders(int n) {
-
-        if(n==1) return 1;
-
-        long long int result=1;
-        
-        for(int i=2; i<=n; i++){
-            int spaces=(i-1)*2 + 1;
-            int possibility= spaces *(spaces  +1)/2;
-            result *= possibility;
-            result%=1000000007;
+        long long num=1;
+        for(long long i=1; i<n; i++){
+            num=(num*(i+1)*(2*i+1)%mod);
         }
-
-        return result;
-        
+        return num;
     }
 };
