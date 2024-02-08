@@ -1,3 +1,7 @@
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 class Solution {
 public:
     // 1. Recursion
@@ -33,14 +37,20 @@ public:
             mini = min(mini,ans);
         }
 
-        dp[n] = mini;
-        return dp[n];
+        return dp[n] = mini;
     }
     
-    // 3. Tabulation
-    // TC - O(N * sqrt(N)) and SC - O(N)
-    int solveTab(int n)
-    {
+    
+
+    int numSquares(int n) {
+        // 1. Recursion
+        // return solve(n);
+
+        // 2. Memoization
+        // vector<int> dp(n+1,-1);
+        // return solveMem(n,dp);
+
+        // 3. Tabulation
         vector<int> dp(n+1,INT_MAX);
         dp[0] = 0;
 
@@ -57,17 +67,5 @@ public:
         }
         
         return dp[n];
-    }
-
-    int numSquares(int n) {
-        // 1. Recursion
-        // return solve(n);
-
-        // 2. Memoization
-        vector<int> dp(n+1,-1);
-        return solveMem(n,dp);
-
-        // 3. Tabulation
-        // return solveTab(n);
     }
 };
