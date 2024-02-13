@@ -41,12 +41,12 @@ void fillQueen(int col,int n,vector<vector<string>>&ans,vector<string>&ds){
     }
 }
     vector<vector<string>> solveNQueens(int n) {
-          vector<string>ds(n);
-          string s(n,'.');
+          vector<string>ds(n, string(n,'.'));
+        //   string s(n,'.');
            vector<vector<string>>ans;
-          for(int i=0;i<n;i++){
-              ds[i]=s;
-          }
+        //   for(int i=0;i<n;i++){
+        //       ds[i]=s;
+        //   }
    
     fillQueen(0,n,ans,ds);
     return ans;
