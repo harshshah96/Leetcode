@@ -5,53 +5,33 @@ static int io_opt = []() {
 
 class Solution {
 public:
-    int count;
-    bool isSafe(int row,int col,vector<string>&ds,int n){
-        int duprow=row;
-        int dupcol=col;
-        while(row>=0&&col>=0){
-        if(ds[row][col]=='Q') return false;
-        row--;
-        col--;
-        }
-        row=duprow;
-        col=dupcol;
-        while(col>=0){
-        if(ds[row][col]=='Q') return false;
-        col--;
-        }
-        row=duprow;
-        col=dupcol;
-        while(row<n&&col>=0){
-            if(ds[row][col]=='Q') return false;
-        col--;
-        row++;
-        }
-        return true;
-    }
-    void fillQueen(int col,int n,vector<vector<string>>&ans,vector<string>&ds){
+    void helper(int col, int n, int &counter, vector<string> &temp, vector<int> &left, vector<int> &lower, vector<int> &upper){
         if(col==n){
-            count++;
+            counter++;
             return;
         }
-        for(int row=0;row<n;row++){
-            if(isSafe(row,col,ds,n)){
-                ds[row][col]='Q';
-                fillQueen(col+1,n,ans,ds);
-                ds[row][col]='.';
+        for(int i=0;i<n;i++){
+            if(left[i]==0 and lower[i+col]==0 and upper[n-1+col-i]==0){
+                left[i]=1;
+                lower[i+col]=1;
+                upper[n-1+col-i]=1;
+                temp[i][col]='Q';
+                
+                helper(col+1,n,counter,temp,left,lower,upper);
+
+                left[i]=0;
+                lower[i+col]=0;
+                upper[n-1+col-i]=0;
+                temp[i][col]='.';
             }
         }
     }
-        int totalNQueens(int n) {
-            count=0;
-            vector<string>ds(n, string(n,'.'));
-            vector<vector<string>>ans;
-            //   string s(n,'.');
-            //   for(int i=0;i<n;i++){
-            //       ds[i]=s;
-            //   }
-    
-        fillQueen(0,n,ans,ds);
-        return count;
-        }
+    int totalNQueens(int n) {
+        int counter=0;
+        string s(n,'.');
+        vector<string> temp(n,s);
+        vector<int> leftRow(n,0), lowerDiagnol(2*n-1,0), upperDiagnol(2*n-1,0);
+    helper(0,n,counter,temp,leftRow,lowerDiagnol,upperDiagnol);
+    return counter;        
+    }
 };
