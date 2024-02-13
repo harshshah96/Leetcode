@@ -5,24 +5,7 @@ static int io_opt = []() {
 class Solution {
 public:
     int n;
-    void saveBoard(vector<vector<char>>&board,vector<vector<string>> &ans){
-
-        vector<string> ans1;
-
-        for(int i=0; i<n; i++){
-            string a="";
-            for(int j=0; j<n; j++){
-                if(board[i][j]=='Q') a+='Q';
-                else a+='.';
-            }
-            ans1.push_back(a);
-        }
-        ans.push_back(ans1);
-
-    }
-
-
-    bool isSafe(int row, int col, vector<vector<char>>&board){
+    bool isSafe(int row, int col,vector<string>&board){
         
         
         // check row
@@ -58,9 +41,9 @@ public:
 
     }
 
-    void solve(vector<vector<string>> &ans,vector<vector<char>>&board, int col){
+    void solve(vector<vector<string>> &ans,vector<string>&board, int col){
         if(col==n){
-            saveBoard(board, ans);
+            ans.push_back(board);
             return;
         }
         
@@ -76,7 +59,7 @@ public:
     vector<vector<string>> solveNQueens(int m) {
         n=m;
         vector<vector<string>> ans;
-        vector<vector<char>>board(n, vector<char>(n,'.'));
+        vector<string>board(n, string(n,'.'));
 
         solve(ans,board,0);
 
