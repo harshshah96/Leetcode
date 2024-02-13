@@ -1,7 +1,3 @@
-static int io_opt = []() {
-  ios::sync_with_stdio(false);
-  return 0;
-}();
 class Solution {
 public:
     bool isPalindrome(string &a){
@@ -14,12 +10,8 @@ public:
         return true;
     }
     string firstPalindrome(vector<string>& words) {
-        int n=words.size();
-
-        for(int i=0; i<n; ++i){
-            string a=words[i];
-            if(isPalindrome(a)) return a;
-        }
+    
+        for(int i=0; i<words.size(); ++i) if(isPalindrome(words[i])) return words[i];
 
         return "";
         
