@@ -4,67 +4,51 @@ static int io_opt = []() {
 }();
 class Solution {
 public:
-    int n;
-    bool isSafe(int row, int col,vector<string>&board){
-        
-        
-        // check row
-        for(int i=0; i<n; i++){
-            if(board[row][i]=='Q') return false;
-        }
-        // check col
-        for(int i=0; i<n; i++){
-            if(board[i][col]=='Q') return false;
-        }
-        // check top left;
-        
-        for(int r=row, c=col; r>=0 && c>=0; r--, c--){
-            if(board[r][c]=='Q') return false;
-        }
-        // check top right;
-        
-        for(int r=row, c=col; r>=0 && c<n; r--, c++){
-            if(board[r][c]=='Q') return false;
-        }
-        // check bottom left;
-        
-        for(int r=row, c=col; r<n && c>=0; r++, c--){
-            if(board[r][c]=='Q') return false;
-        }
-        // check bottom right;
-        
-        for(int r=row, c=col; r<n && c<n; r++, c++){
-            if(board[r][c]=='Q') return false;
-        }
-
-        return true;
-
+bool isSafe(int row,int col,vector<string>&ds,int n){
+    int duprow=row;
+    int dupcol=col;
+    while(row>=0&&col>=0){
+       if(ds[row][col]=='Q') return false;
+       row--;
+       col--;
     }
-
-    void solve(vector<vector<string>> &ans,vector<string>&board, int col){
-        if(col==n){
-            ans.push_back(board);
-            return;
-        }
-        
-        for(int row=0; row<n; row++){
-            if(isSafe(row, col, board)){
-                board[row][col]='Q';
-                solve(ans, board, col+1);
-                board[row][col]='.';
-            }
-        }
-        
+    row=duprow;
+    col=dupcol;
+     while(col>=0){
+       if(ds[row][col]=='Q') return false;
+       col--;
     }
-    vector<vector<string>> solveNQueens(int m) {
-        n=m;
-        vector<vector<string>> ans;
-        vector<string>board(n, string(n,'.'));
-
-        solve(ans,board,0);
-
-        return ans;
-
-        
+      row=duprow;
+    col=dupcol;
+    while(row<n&&col>=0){
+         if(ds[row][col]=='Q') return false;
+       col--;
+       row++;
+    }
+    return true;
+}
+void fillQueen(int col,int n,vector<vector<string>>&ans,vector<string>&ds){
+    if(col==n){
+        ans.push_back(ds);
+        return;
+    }
+    for(int row=0;row<n;row++){
+        if(isSafe(row,col,ds,n)){
+            ds[row][col]='Q';
+            fillQueen(col+1,n,ans,ds);
+            ds[row][col]='.';
+        }
+    }
+}
+    vector<vector<string>> solveNQueens(int n) {
+          vector<string>ds(n);
+          string s(n,'.');
+           vector<vector<string>>ans;
+          for(int i=0;i<n;i++){
+              ds[i]=s;
+          }
+   
+    fillQueen(0,n,ans,ds);
+    return ans;
     }
 };
