@@ -1,7 +1,7 @@
-static int io_opt = []() {
-  ios::sync_with_stdio(false);
-  return 0;
-}();
+// static int io_opt = []() {
+//   ios::sync_with_stdio(false);
+//   return 0;
+// }();
 class Solution {
 public:
     void solve(TreeNode* root, map<int,map<int,multiset<int>>> &mp, int vertical , int level){
