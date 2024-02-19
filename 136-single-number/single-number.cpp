@@ -1,7 +1,3 @@
-static int io_opt = []() {
-  ios::sync_with_stdio(false);
-  return 0;
-}();
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
@@ -9,7 +5,7 @@ public:
         int n=nums.size();
 
         for(int i=0; i<n; i++){
-            a=a^nums[i];
+            a^=nums[i];
         }
 
         return a;
