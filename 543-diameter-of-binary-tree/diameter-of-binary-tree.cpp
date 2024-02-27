@@ -11,7 +11,7 @@ public:
         auto leftData = calculateDiameterAndHeight(root->left);
         auto rightData = calculateDiameterAndHeight(root->right);
 
-        int currentDiameter = max({leftData.second + rightData.second,leftData.first, rightData.first});
+        int currentDiameter = max(leftData.second + rightData.second,max(leftData.first, rightData.first));
         int currentHeight = max(leftData.second, rightData.second) + 1;
 
         return {currentDiameter, currentHeight};
