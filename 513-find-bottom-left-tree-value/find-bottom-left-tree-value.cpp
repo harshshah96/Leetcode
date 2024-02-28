@@ -4,29 +4,22 @@ static int io_opt = []() {
 }();
 class Solution {
 public:
-    int leftSideView(TreeNode* root) {
-    vector<int> result;
-
-    queue<TreeNode*> q;
-    q.push(root);
-
-    while (!q.empty()) {
-        int level_size = q.size();
-        for (int i = 0; i < level_size; ++i) {
-            TreeNode* node = q.front();
-            q.pop();
-            if (i == 0) {
-                result.push_back(node->val); // Add the first node value to the result (left side view)
-            }
-            if (node->left) q.push(node->left);
-            if (node->right) q.push(node->right);
-        }
+    int level(TreeNode* root){
+        if(root==NULL) return 0;
+        return (1 + max(level(root->right), level(root->left)));
     }
-
-    return result[result.size()-1];
-}
+    void preorder(TreeNode* root, vector<int> &ans, int level){
+        if(root==NULL) return;
+        ans[level]=root->val;
+        preorder(root->right, ans,level+1);
+        preorder(root->left, ans, level+1);
+        
+    }
     int findBottomLeftValue(TreeNode* root) {
-        return leftSideView(root);
+        vector<int> result(level(root),0);
+        preorder(root,result,0);
+
+        return result[result.size()-1];
         
     }
 };
