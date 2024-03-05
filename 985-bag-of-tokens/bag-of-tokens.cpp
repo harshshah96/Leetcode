@@ -12,15 +12,15 @@ public:
         int j=n-1;
 
         int score=0;
-        int maxScore=0;
+        // int maxScore=0;
 
         while(i<=j){
             if(power>=tokens[i]){
                 power-=tokens[i];
                 score++;
-                maxScore=max(maxScore,score);
+                // maxScore=max(maxScore,score);
                 i++;
-            }else if(score){
+            }else if(score && i!=j){
                 power+=tokens[j];
                 score--;
                 j--;
@@ -28,7 +28,7 @@ public:
 
         }
 
-        return maxScore;
+        return score;
         
     }
 };
