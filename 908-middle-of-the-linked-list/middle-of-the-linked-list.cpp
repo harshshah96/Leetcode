@@ -6,17 +6,16 @@ class Solution {
 public:
 
     ListNode* middleNode(ListNode* head) {
-        int count =0;
-        ListNode* temp=head;
-        while(temp!=NULL){
-            temp=temp->next;
-            count++;
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while(fast && fast->next){
+            fast=fast->next;
+            if(fast->next)fast=fast->next;
+            slow=slow->next;
         }
-        int middle=count/2;
-        for(int i=1; i<=middle;i++){
-            head=head->next;
-        }
-        return head;
+
+        return slow;
 
         
     }
