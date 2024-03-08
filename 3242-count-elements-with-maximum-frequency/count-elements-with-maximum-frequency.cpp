@@ -15,7 +15,7 @@ public:
             mxFreq=max(mxFreq , mp[nums[i]]);
         }
         int count=0;
-        for(auto ele:mp){
+        for(auto &ele:mp){
             if(ele.second == mxFreq) count+=mxFreq;
         }
 
