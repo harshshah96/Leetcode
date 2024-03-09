@@ -8,9 +8,9 @@ public:
         int n1=nums1.size();
         int n2=nums2.size();
         
-        // Suppose n1 is greater or equal to n2
-        // if not
-        if(n1<n2) return getCommon(nums2, nums1);
+        // // Suppose n1 is greater or equal to n2
+        // // if not
+        // if(n1<n2) return getCommon(nums2, nums1);
 
         int i=0;
         int j=0;
