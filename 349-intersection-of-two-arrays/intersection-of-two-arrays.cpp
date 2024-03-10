@@ -7,7 +7,7 @@ public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
         // approach 1: using hash-sets
         unordered_set<int> set1;
-        //if(nums1.size()>nums2.size()) return intersection(nums2,nums1);
+        if(nums1.size()>nums2.size()) return intersection(nums2,nums1);
         for(int ele : nums1){
             set1.insert(ele);
         }
