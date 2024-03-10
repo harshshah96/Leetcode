@@ -5,19 +5,24 @@ static int io_opt = []() {
 class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        // approach 1: using hash-sets
         unordered_set<int> set1;
-        unordered_set<int> set2;
-
+        //if(nums1.size()>nums2.size()) return intersection(nums2,nums1);
         for(int ele : nums1){
             set1.insert(ele);
         }
-        for(int ele : nums2){
-            set2.insert(ele);
-        }
         vector<int>ans;
-        for(int ele : set1){
-            if(set2.count(ele)) ans.push_back(ele);
+        for(int ele : nums2){
+            if(set1.count(ele)){
+                ans.push_back(ele);
+                set1.erase(ele);
+
+            }
         }
         return ans;
+
+
+
+        
     }
 };
