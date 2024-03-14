@@ -1,23 +1,28 @@
-// static int io_opt = []() {
-//   ios::sync_with_stdio(false);
-//   return 0;
-// }();
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 class Solution {
 public:
-    int numSubarraysWithSum(vector<int>& nums, int goal) {
-        unordered_map<int, int> count;
-        count[0] = 1;
-        int curr_sum = 0;
-        int total_subarrays = 0;
 
-        for (int num : nums) {
-            curr_sum += num;
-            if (count.find(curr_sum - goal) != count.end()) {
-                total_subarrays += count[curr_sum - goal];
+    int atmostSumK(vector<int> nums, int goal){
+        if(goal<0)
+            return 0;
+        int i = 0, n = nums.size(), count =0,sum=0;
+
+        for(int j = 0;j<n;j++){
+            sum+=nums[j];
+            while(sum>goal){
+                sum -=nums[i];
+                i++;
             }
-            count[curr_sum]++;
+            count = count+(j-i+1);
         }
+        return count;
+    }
 
-        return total_subarrays;
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+       int k = atmostSumK(nums,goal) - atmostSumK(nums,goal-1);
+        return k;
     }
 };
