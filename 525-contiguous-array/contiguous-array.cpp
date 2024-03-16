@@ -1,3 +1,7 @@
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 class Solution {
 public:
     int findMaxLength(vector<int>& nums) {
@@ -9,10 +13,8 @@ public:
 
         for(int i=0;i<n ;i++){
             sum += nums[i]==0 ? -1 : 1;
-            if(mp.find(sum)!=mp.end()) length=max(length , i-mp[sum]);
-            else{
-                mp[sum]=i;
-            }
+            if(mp.find(sum) != mp.end()) length=max(length , i-mp[sum]);
+            else mp[sum]=i;
 
         }
 
