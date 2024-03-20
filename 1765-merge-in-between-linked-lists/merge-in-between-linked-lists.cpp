@@ -2,33 +2,33 @@
   ios::sync_with_stdio(false);
   return 0;
 }();
+
 class Solution {
 public:
     ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
+        ListNode* temp1= list1;
+        // ListNode* temp1B= list1;
+        ListNode* temp2= list2;
 
-        ListNode* slow=list1;
-        int diff = b-a+1;
-
-        ListNode* fast=list1;
-
-        while(diff--){
-            fast=fast->next;
+        while(temp2->next!=NULL){
+            temp2=temp2->next;    
         }
-        for(int i=0; i<a-1; i++){
-            slow=slow->next;
-            fast=fast->next;
+        for(int i=0; i<=b; i++){
+            temp1=temp1->next;
         }
-
-        ListNode* end = list2;
-        while(end->next){
-            end=end->next;
+        temp2->next=temp1;
+        
+        temp1=list1;
+        temp2=list2;
+        for(int i=0; i<a-1;i++){
+            temp1=temp1->next;
         }
-        end->next=fast->next;
-        slow->next=list2;
+        temp1->next=temp2;
 
         return list1;
-
 
         
     }
 };
+
+ 
