@@ -10,6 +10,7 @@ public:
         for(int i=0; i<s.length(); i++){
             if(s[i]=='(') depth +=1;
             else if(s[i]== ')') depth-=1;
+            else continue;
             maxDepth=max(maxDepth,depth);
         }
 
