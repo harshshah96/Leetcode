@@ -1,4 +1,7 @@
-
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 class Solution {
 public:
 
@@ -13,9 +16,11 @@ public:
         }
 
         if(currDepth == depth-1){
+            //left
             TreeNode* temp1= new TreeNode(val);
             temp1->left = root->left;
             root->left=temp1;
+            //right
             TreeNode* temp2= new TreeNode(val);
             temp2->right = root->right;
             root->right=temp2;
@@ -28,11 +33,7 @@ public:
     }
 
     TreeNode* addOneRow(TreeNode* root, int val, int depth) {
-
         dfs(root, val, depth , 1);
-
-        return root;
-
-        
+        return root;  
     }
 };
