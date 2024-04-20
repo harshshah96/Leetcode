@@ -4,27 +4,41 @@ static int io_opt = []() {
 }();
 class Solution {
 public:
-   vector<int> dir = { 0, 1, 0, -1, 0 }; 
-    bool isCyclic(vector<vector<char>>& grid, vector<vector<bool>>& visited, int i, int j, int x, int y)
-    {
-        visited[i][j] = true;
-        for(int d = 0; d < 4; ++d)
-        {
-            int a = i+dir[d];
-            int b = j+dir[d+1];
-            if(a >= 0 && a < grid.size() && b >= 0 && b < grid[0].size() && grid[a][b] == grid[i][j] && !(x == a && y == b))
-                if(visited[a][b] || isCyclic(grid, visited, a,b,i,j))
-                    return true;
+    static bool dfs(int x, int y, vector<vector<char>>& grid, vector<vector<int>>& vis, int parentX, int parentY) {
+        int n = grid.size();
+        int m = grid[0].size();
+        vis[x][y] = 1;
+        int delrow[] = {-1, 0, 1, 0};
+        int delcol[] = {0, 1, 0, -1};
+        for (int i = 0; i < 4; i++) {
+            int nrow = x + delrow[i];
+            int ncol = y + delcol[i];
+            if(nrow >=0 && nrow < n && ncol >= 0 && ncol < m
+            && grid[nrow][ncol] == grid[x][y] && !(parentX == nrow && parentY == ncol)){
+                if(vis[nrow][ncol]) return true;
+                else {
+                    bool cycle = dfs(nrow,ncol,grid,vis,x,y);
+                    if(cycle) return true;
+                }
+            }
         }
         return false;
     }
+
     bool containsCycle(vector<vector<char>>& grid) {
-        int n = grid.size(), m = grid[0].size();
-        vector<vector<bool>> visited(n, vector<bool>(m, false));
-        for(int i = 0; i < n; ++i)
-            for(int j = 0; j < m; ++j)
-                if(!visited[i][j] && isCyclic(grid, visited, i, j, -1, -1))
-                    return true;
-        return false;
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<int>> vis(n, vector<int>(m, 0));
+        bool flag = false;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (vis[i][j] == 0) {
+                    flag = dfs(i, j, grid, vis, -1, -1);
+                }
+                if(flag) break;
+            }
+            if(flag) break;
+        }
+        return flag;
     }
 };
