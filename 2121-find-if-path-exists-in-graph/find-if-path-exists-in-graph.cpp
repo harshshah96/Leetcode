@@ -1,33 +1,41 @@
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 class Solution {
+    vector<int> parent;
+    vector<int> size;
 public:
-    bool dfs(unordered_map<int,vector<int>> &mp, int S, int D, vector<bool> &visited){
-        if(S==D) return true;
-
-        if(visited[S]==true) return false;
-
-        visited[S]=true;
-
-        for(auto &node: mp[S]){
-            if(dfs(mp, node, D, visited)) return true;
-        }
-
-        return false;
+    int find(int i){
+        if(parent[i]==i) return i;
+        return parent[i]=find(parent[i]);
     }
+    void combine(int u, int v) {
+        u = find(u);
+        v = find(v);
 
-    bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
-        unordered_map<int, vector<int>> mp;
+        if (u==v)
+            return;
 
-        for(auto it:edges){
-            int u=it[0];
-            int v=it[1];
-            mp[u].push_back(v);
-            mp[v].push_back(u);
+        if (size[u]>size[v])
+            swap(u, v);
+
+        parent[u] = v;
+        size[v] += size[u];
+    }
+    
+    bool validPath(const int n, const vector<vector<int>>& edges, const int source, const int destination){
+        parent = vector<int>(n);
+        size = vector<int>(n, 1);
+
+        for (int i=0; i<n; i++){
+            parent[i] = i;
         }
-
-        vector<bool> visited(n,false);
-
-        return dfs(mp,source , destination, visited);
-
-        
+            
+        for (const auto& edge : edges){  
+            combine(edge[0], edge[1]);
+        }
+            
+        return find(source)==find(destination);
     }
 };
