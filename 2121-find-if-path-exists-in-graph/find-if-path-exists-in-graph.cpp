@@ -1,7 +1,3 @@
-static int io_opt = []() {
-  ios::sync_with_stdio(false);
-  return 0;
-}();
 class Solution {
 public:
     bool dfs(unordered_map<int,vector<int>> &mp, int S, int D, vector<bool> &visited){
