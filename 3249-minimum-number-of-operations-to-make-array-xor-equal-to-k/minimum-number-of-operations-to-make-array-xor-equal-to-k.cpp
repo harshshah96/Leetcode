@@ -13,16 +13,14 @@ public:
     int minOperations(vector<int>& nums, int k) {
 
 
-        int ans=0;
+        int ans=k;
         for(auto it : nums){
             ans^=it;
         }
 
         //count 1's
 
-        int result=countOnes(ans^k);
-        
-        
+        int result=countOnes(ans);
 
         return result;
         
