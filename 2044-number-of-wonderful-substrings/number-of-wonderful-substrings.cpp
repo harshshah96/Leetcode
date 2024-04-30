@@ -1,4 +1,8 @@
 typedef long long ll;
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 class Solution {
 public:
     long long wonderfulSubstrings(string word) {
@@ -22,7 +26,7 @@ public:
         
             mp[cum_xor]++;
         }
-        
+
         return result;
     }
 };
