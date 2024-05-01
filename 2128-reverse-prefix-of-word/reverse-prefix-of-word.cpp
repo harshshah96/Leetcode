@@ -1,7 +1,7 @@
-static int io_opt = []() {
-  ios::sync_with_stdio(false);
-  return 0;
-}();
+// static int io_opt = []() {
+//   ios::sync_with_stdio(false);
+//   return 0;
+// }();
 class Solution {
 public:
     string reversePrefix(string word, char ch) {
