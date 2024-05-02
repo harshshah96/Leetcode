@@ -6,11 +6,14 @@ public:
         unordered_set<int> st;
         int res=INT_MIN;
 
-        for(auto ele: nums){
-            //positive
-            if(ele > 0 && ele>res && st.find((-1)*ele)!=st.end())res=ele;
-            else if(ele < 0 && (-1)*(ele)> res && st.find((-1)*(ele))!=st.end()) res= (-1)*ele;
-
+        for(auto ele : nums){
+            
+            if(ele > 0 && ele > res && (st.find( (-1)*ele ) != st.end())){ //  positive
+                res=ele;
+            }else if(ele < 0 && abs(ele) > res && (st.find(abs(ele)) != st.end())){ //  Negative
+                res= abs(ele);
+            } 
+            
             st.insert(ele);
         }
 
