@@ -6,20 +6,13 @@ class Solution {
 public:
     long long maximumHappinessSum(vector<int>& happiness, int k) {
         int n=happiness.size();
-        priority_queue<int> pq;
-
-        long long ans=0;
-
-        for(int i=0; i<n ; i++){
-            pq.push(happiness[i]);
+        long long sum = 0;
+        sort(happiness.begin(), happiness.end(), greater<int>());
+        for(int i = 0; i < k; i++) {
+            happiness[i] = max(0, happiness[i]-i);
+            sum += happiness[i];
         }
-
-        for(int i=0; i<k; i++){
-            ans+=max(pq.top()-i,0);
-            pq.pop();
-        }
-
-        return ans;
+        return sum;
         
     }
 };
