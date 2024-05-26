@@ -1,4 +1,8 @@
-class Solution {
+
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();class Solution {
 public:
 
     long long solve(int n , int con_late, int abs, vector<vector<vector<int>>> &dp){
