@@ -7,11 +7,11 @@ public:
         
         while (l > 0) {
             // even number with carry = 0, result even
-            if (s[l] - '0' + carry == 0) {
+            if ((s[l] - '0')==0 && (carry == 0)) {
                 carry = 0;
                 count++;
             // odd number with carry = 1, result even
-            } else if (s[l] - '0' + carry == 2) {
+            } else if ((s[l] - '0' ) == 1 && (carry == 1)) {
                 carry = 1;
                 count++;
             // even number with carry = 1, result odd
