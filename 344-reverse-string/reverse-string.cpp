@@ -1,3 +1,7 @@
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 class Solution {
 public:
     void reverseString(vector<char>& s) {
@@ -6,8 +10,7 @@ public:
         for(int i=0 ; i <n/2 ; i++){
             swap(s[i] , s[n-1-i]);
         }
-
-        return ;
+        return;
         
     }
 };
