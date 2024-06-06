@@ -5,12 +5,15 @@ static int io_opt = []() {
 class Solution {
 public:
     bool isNStraightHand(vector<int>& hand, int groupSize) {
-        sort(hand.begin(), hand.end()); // O(nlogn);
+        
         int n = hand.size();
 
-        if(n % groupSize) return false; 
+        if (groupSize == 1) return true;
+        if(n % groupSize) return false;
 
-        map<int,int> mp;
+        sort(hand.begin(), hand.end()); // O(nlogn);
+
+        map<int,int> mp; // OrderedMap -> TC = O(logn)
 
         for(auto ele : hand){
             mp[ele]++;
