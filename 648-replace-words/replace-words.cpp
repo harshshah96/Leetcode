@@ -1,26 +1,30 @@
 class Solution {
 public:
-    string replaceWords(vector<string>& dict, string sentence) {
-        set<string> s(begin(dict), end(dict));
-        istringstream iss(sentence);
-        vector<string> temp;
-        string word, res; 
-
-        while(iss >> word) temp.push_back(word);
-        for(string t : temp) {
-            int i = 0;
-            while(i++ <= t.length()) {
-                string curr = t.substr(0, i);
-                if(s.find(curr) != s.end()) {
-                    res += curr + " ";
-                    break;
+    string replaceWords (vector<string>& dict, string sent) {
+        set<string>s;
+        for (auto i : dict){
+            s.insert(i);
+        }
+        string ans="";
+        sent.push_back(' ');
+        string temp="";
+        for (int i=0;i<(int)sent.size(); i++){
+            if(sent[i]==' '){
+                ans+=temp;
+                ans+=(char)(' ');
+                temp="";
+            }
+            else{
+                temp+=(char)(sent[i]);
+                if(s.count(temp)) {
+                    ans+=temp;
+                    ans+=(char)(' ');
+                    temp="";
+                    while(sent[i]!=' ') i++;
                 }
-                
-                if(i == t.length()) res += curr + " ";
             }
         }
-
-        res.erase(res.size() - 1);
-        return res;
+        ans.pop_back();
+        return ans;
     }
 };
