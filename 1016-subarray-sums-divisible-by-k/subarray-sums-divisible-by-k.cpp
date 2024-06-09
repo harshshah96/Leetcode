@@ -5,22 +5,34 @@ static int io_opt = []() {
 class Solution {
 public:
     int subarraysDivByK(vector<int>& nums, int k) {
-        unordered_map<int,int>mp;
-        int count = 0;
-        mp[0]=1;
-        //sum of the elements of the subarray is a multiple of k
-        int sum = 0 ;
-        int n = nums.size();
+        // unordered_map<int,int>mp;
+        // int count = 0;
+        // mp[0]=1;
+        // //sum of the elements of the subarray is a multiple of k
+        // int sum = 0 ;
+        // int n = nums.size();
 
-        for(int i = 0; i < n ; i++){
-            sum+=nums[i];
-            int a = sum%k < 0 ? (sum%k + k) : sum%k ;
-            if(mp.find(a)!=mp.end()) count+=mp[a];
-            // if(mp.find(a-k)!=mp.end()) count+= mp[a-k];
-            mp[a]++;
+        // for(int i = 0; i < n ; i++){
+        //     sum+=nums[i];
+        //     int a = sum%k < 0 ? (sum%k + k) : sum%k ;
+        //     if(mp.find(a)!=mp.end()) count+=mp[a];
+        //     // if(mp.find(a-k)!=mp.end()) count+= mp[a-k];
+        //     mp[a]++;
+        // }
+
+        // return count;
+
+        int res = 0, mp[k];
+        memset(mp, 0, sizeof(mp));
+        mp[0] = 1;
+        int sum = 0;
+        for(auto& num : nums)
+        {
+            sum += num;
+            int rem = (sum % k + k) % k;
+            res += mp[rem]++;
         }
-
-        return count;
+        return res;
 
     }
 };
