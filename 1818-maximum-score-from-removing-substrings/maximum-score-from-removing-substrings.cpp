@@ -1,56 +1,43 @@
-#include <iostream>
-#include <stack>
-#include <string>
-using namespace std;
-
-static int io_opt = []() {
-    ios::sync_with_stdio(false);
-    return 0;
-}();
-
 class Solution {
 public:
     int maximumGain(string s, int x, int y) {
-        // Helper function to calculate the score for given pairs
-        auto calculateScore = [](string &str, char first, char second, int score) {
-            stack<char> st;
-            int points = 0;
-            for (char c : str) {
-                if (!st.empty() && c == second && st.top() == first) {
-                    st.pop();
-                    points += score;
-                } else {
-                    st.push(c);
-                }
-            }
-            
-            // Reconstruct the remaining string after removal
-            string remaining;
-            while (!st.empty()) {
-                remaining.push_back(st.top());
-                st.pop();
-            }
-            reverse(remaining.begin(), remaining.end());
-            return make_pair(points, remaining);
-        };
-
-        int totalScore = 0;
-
-        // If x > y, prioritize "ab" pairs first, else prioritize "ba" pairs
-        if (x >= y) {
-            auto result = calculateScore(s, 'a', 'b', x);
-            totalScore += result.first;
-            s = result.second;
-            result = calculateScore(s, 'b', 'a', y);
-            totalScore += result.first;
-        } else {
-            auto result = calculateScore(s, 'b', 'a', y);
-            totalScore += result.first;
-            s = result.second;
-            result = calculateScore(s, 'a', 'b', x);
-            totalScore += result.first;
+        // Ensure "ab" always has more points than "ba"
+        if (x < y) {
+            // Swap points
+            int temp = x;
+            x = y;
+            y = temp;
+            // Reverse the string to maintain logic
+            reverse(s.begin(), s.end());
         }
 
-        return totalScore;
+        int aCount = 0, bCount = 0, totalPoints = 0;
+
+        for (int i = 0; i < s.size(); ++i) {
+            char currentChar = s[i];
+
+            if (currentChar == 'a') {
+                ++aCount;
+            } else if (currentChar == 'b') {
+                if (aCount > 0) {
+                    // Can form "ab", remove it and add points
+                    --aCount;
+                    totalPoints += x;
+                } else {
+                    // Can't form "ab", keep 'b' for potential future "ba"
+                    ++bCount;
+                }
+            } else {
+                // Non 'a' or 'b' character encountered
+                // Calculate points for any remaining "ba" pairs
+                totalPoints += min(bCount, aCount) * y;
+                // Reset counters for next segment
+                aCount = bCount = 0;
+            }
+        }
+        // Calculate points for any remaining "ba" pairs at the end
+        totalPoints += min(bCount, aCount) * y;
+
+        return totalPoints;
     }
 };
