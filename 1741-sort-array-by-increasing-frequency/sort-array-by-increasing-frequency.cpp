@@ -1,36 +1,44 @@
-class Solution {
-public:
-    static vector<int> frequencySort(vector<int>& nums) {
-        const int n = nums.size();
-        vector<int> freq(201, 0);
-        int maxF = 0, maxX = -1;
-        for (int x : nums) {
-            x += 100; // x-min_x where min_x=-100
-            int f = ++freq[x];
-            maxX = max(x, maxX);
-            maxF = max(f, maxF);
-        }
-        vector<vector<int>> freqx(maxF + 1);
-        for (int x = maxX; x >=0; x--) {
-            if (freq[x] > 0)
-                freqx[freq[x]].push_back(x-100); // Adjust value back
-        }
 
-        int i = 0;
-        for (int f = 1; f <= maxF; f++) {
-            auto& arr = freqx[f];
-            for (int x : arr) {// each x occurs f times
-                fill(nums.begin()+i, nums.begin()+i+f, x);
-                i+=f;
-            }
+class CustomComparator {
+public:
+    bool operator()(const pair<int, int>& a, const pair<int, int>& b) const {
+        if (a.second != b.second) {
+            return a.second > b.second; // Min heap based on second value
         }
-        return nums;
+        return a.first < b.first; // Greater value of the first element in case of tie
     }
 };
 
-auto init = []() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return 'c';
-}();
+class Solution {
+public:
+    vector<int> frequencySort(vector<int>& nums) {
+        unordered_map<int, int> mp; 
+
+        for (auto ele : nums) {
+            mp[ele]++;
+        }
+
+        // Priority queue with custom comparator
+        priority_queue<pair<int, int>, vector<pair<int, int>>, CustomComparator> pq;
+
+        for (auto ele : mp) {
+            pq.push(ele);
+        }
+
+        vector<int> ans;
+
+        while (!pq.empty()) {
+            auto ele = pq.top();
+            pq.pop();
+
+            int freq = ele.second;
+            int value = ele.first;
+
+            for (int i = 0; i < freq; i++) {
+                ans.push_back(value);
+            }
+        }
+
+        return ans;
+    }
+};
