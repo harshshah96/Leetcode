@@ -1,4 +1,7 @@
-
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 class Solution {
     static constexpr int howLong(int needed, int time, int change) {
         int ans = 0;
