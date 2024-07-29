@@ -1,9 +1,3 @@
-inline const auto optimize = []() {
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    std::cout.tie(nullptr);
-    return 0;
-}();
 
 class Solution {
     static constexpr int howLong(int needed, int time, int change) {
