@@ -1,5 +1,7 @@
-#include <string>
-
+static int io_opt = []() {
+  ios::sync_with_stdio(false);
+  return 0;
+}();
 class Solution {
 public:
     int countSeniors(vector<string>& details) {
@@ -10,7 +12,7 @@ public:
 
             int age = stoi(details[i].substr(11,2));
             if(age>60) count++;
-            
+
         }
 
         return count;
